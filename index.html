@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AP Score Report</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #e0f7fa; /* 薄荷绿背景 */
+      color: #333;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      color: #004d40; /* 深绿色标题 */
+    }
+
+    .form-container {
+      margin: 2rem auto;
+      max-width: 400px;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      padding: 0.6rem;
+      margin: 0.6rem 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 0.6rem 1.5rem;
+      background: #66bb6a; /* 薄荷绿按钮 */
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .loading {
+      margin-top: 1.5rem;
+      display: none;
+    }
+
+    .score-report {
+      display: none;
+      margin-top: 2rem;
+      background: #ffffff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .score-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 0.8rem 0;
+      font-size: 1.2rem;
+    }
+
+    .score-row strong {
+      color: #66bb6a; /* 薄荷绿分数 */
+    }
+
+    .special-message {
+      font-size: 1.5rem;
+      color: #ff6347;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>College Board AP Score Report</h1>
+  <div class="form-container">
+    <p>Please enter your name and date of birth to access your AP scores.</p>
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="date" id="dob">
+    <button onclick="showScores()">View Scores</button>
+    <div class="loading" id="loading">🔄 Loading scores...</div>
+  </div>
+
+  <div class="score-report" id="report">
+    <h2>Your 2025 AP Scores</h2>
+    <div class="score-row"><span>AP World History: Modern</span> <strong>5</strong></div>
+    <div class="score-row"><span>AP French Language and Culture</span> <strong>5</strong></div>
+    <div class="score-row"><span>AP English Language and Composition</span> <strong>5</strong></div>
+    <div class="score-row"><span>AP Calculus BC</span> <strong>5</strong></div>
+    <p style="margin-top: 2rem; font-style: italic; color: #555;">Congratulations on your outstanding performance!</p>
+  </div>
+
+  <div class="special-message" id="specialMessage"></div>
+
+  <script>
+    function showScores() {
+      const name = document.getElementById('name').value.trim();
+      const dob = document.getElementById('dob').value;
+      if (!name || !dob) {
+        alert("Please enter your full name and date of birth.");
+        return;
+      }
+
+      // Check if name is Thomas and display birthday message
+      if (name.toLowerCase() === 'thomas') {
+        document.getElementById('specialMessage').innerHTML = "🎉 Happy Birthday, Thomas! 🎂";
+      } else {
+        document.getElementById('specialMessage').innerHTML = "";
+      }
+
+      document.getElementById('loading').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('report').style.display = 'block';
+        displayPersonalizedMessages();
+      }, 2000);
+    }
+
+    function displayPersonalizedMessages() {
+      const reportRows = document.querySelectorAll('.score-row');
+      // Check each subject and modify the message accordingly
+      reportRows.forEach(row => {
+        const subject = row.querySelector('span').textContent;
+        const score = row.querySelector('strong').textContent;
+        if (score === '5') {
+          if (subject.includes('AP Calculus BC')) {
+            row.querySelector('strong').textContent = "5 - Math Genius! 🧠";
+          } else if (subject.includes('AP World History')) {
+            row.querySelector('strong').textContent = "5 - History Master! 🏆";
+          } else if (subject.includes('AP French Language and Culture')) {
+            row.querySelector('strong').textContent = "5 - French Expert! 🇫🇷";
+          } else if (subject.includes('AP English Language and Composition')) {
+            row.querySelector('strong').textContent = "5 - English Virtuoso! 📚";
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
