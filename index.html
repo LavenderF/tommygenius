@@ -81,18 +81,19 @@
   <h1>College Board AP Score Report</h1>
   <div class="form-container">
     <p>Please enter your name and date of birth to access your AP scores.</p>
-    <input type="text" id="name" placeholder="First Name">
+    <input type="text" id="name" placeholder="Surname">
     <input type="date" id="dob">
     <button onclick="showScores()">View Scores</button>
     <div class="loading" id="loading">🔄 Loading scores...</div>
   </div>
 
   <div class="score-report" id="report">
-    <h2>Your 2025 AP Scores</h2>
+    <h2>Your 2026 AP Scores</h2>
     <div class="score-row"><span>AP World History: Modern</span> <strong>5</strong></div>
     <div class="score-row"><span>AP French Language and Culture</span> <strong>5</strong></div>
     <div class="score-row"><span>AP English Language and Composition</span> <strong>5</strong></div>
     <div class="score-row"><span>AP Calculus BC</span> <strong>5</strong></div>
+    <div class="score-row"><span>AP Physics 1</span> <strong>5</strong></div>
     <p style="margin-top: 2rem; font-style: italic; color: #555;">Congratulations on your outstanding performance!</p>
   </div>
 
@@ -103,12 +104,12 @@
       const name = document.getElementById('name').value.trim();
       const dob = document.getElementById('dob').value;
       if (!name || !dob) {
-        alert("Please enter your full name and date of birth.");
+        alert("Please enter your surname and date of birth.");
         return;
       }
 
       // Check if name is Thomas and display birthday message
-      if (name.toLowerCase() === 'thomas') {
+      if (name.toLowerCase() === 'huang') {
         document.getElementById('specialMessage').innerHTML = "🎉 Happy Birthday, Thomas! 🎂";
       } else {
         document.getElementById('specialMessage').innerHTML = "";
@@ -137,6 +138,8 @@
             row.querySelector('strong').textContent = "5 - French Expert! 🇫🇷";
           } else if (subject.includes('AP English Language and Composition')) {
             row.querySelector('strong').textContent = "5 - English Virtuoso! 📚";
+          } else if (subject.includes('AP Physics 1')) {
+            row.querySelector('strong').textContent = "5 - Newton in the 21st Century! ⚛️";
           }
         }
       });
